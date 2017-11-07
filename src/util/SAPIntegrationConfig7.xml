@@ -1,0 +1,633 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SAPConfig version="1.0">
+	<!--接口、服务器配置 -->
+	<Organize Name="KHYJ" Text="康华-DEV" AppServerHost="192.168.90.102"
+		SystemNumber="00" SystemID="DEV" User="khplmcs" Password="12345678"
+		Client="120" Language="ZH" PoolSize="5" IdleTimeout="600"
+		JCO_PEAK_LIMIT="10" />
+
+	<!-- ReturenTable需要输入的table -->
+	<!-- ReflectionKey映射关系字段 -->
+	<!-- Name必须提供Name属性 -->
+	<!-- FunctionName必须提供FunctionName属性 -->
+	<!--物料传递 -->
+	<Function Name="PartTOSap" FunctionName="ZPLM_MAINTAIN_MAT"
+		ReturenTable="ZPLM_MAT" ReflectionKey="SapComponent" Text="传递物料到SAP">
+		<!-- PlmInfoType: 填充表的所需要对象 ; -->
+		<!-- Relation 对象关系，如无对象关系，属性直接获取对象; -->
+		<!-- Form 如有对象关系，属性直接从表单上获取 ; -->
+		<!-- DataType： SAP对应的数据类型; -->
+		<!-- Length : SAP字段长度，在传递前需要检查; -->
+		<!-- SapComponent,SapField ： SAP字段名 ; -->
+		<!-- Text: SAP字段本地化，用来检查抛出错误使用; -->
+		<!-- System: 表明此字段是系统使用 I,U; -->
+		<!-- 映射:PlmField-SapComponent。这对必须提供 -->
+		<FieldConfig PlmInfoType="PartRevision" Relation="" Form=""
+			PlmField="kh3_MODEL" DataType="CHAR" Length="1" SapComponent="MODEL"
+			SapField="MODEL" Text="模式" System="True" />
+		<!-- Name: 表名 -->
+		<!-- IsReturn: 此表是否是返回表 -->
+		<!-- TableSource: 对象的获取源头 -->
+		<Table Name="ZPLM_MAT" IsReturn="False" TablelSource="Item">
+			<!-- PlmInfoType: 填充表的所需要对象 ; -->
+			<!-- Relation 对象关系，如无对象关系，属性直接获取对象; -->
+			<!-- Form 如有对象关系，属性直接从表单上获取 ; -->
+			<!-- 映射:PlmField-SapComponent。这对必须提供 -->
+			<!-- DataType： SAP对应的数据类型; -->
+			<!-- Length : SAP字段长度，在传递前需要检查; -->
+			<!-- SapComponent,SapField ： SAP字段名 ; -->
+			<!-- Text: SAP字段本地化，用来检查抛出错误使用; -->
+			<!-- RegularExpression: 正则表达式，用来校验属性格式 -->
+			<!-- DefaultValue: 默认值，在填写默认值的情况下，如字段名为空，则采用此值传递 -->
+			<!-- IsEmpty: 是否允许为空， 不区分True,False 大小写 -->
+			<!-- Format: 数据格式化等同String.Format -->
+			<FieldConfig PlmInfoType="PartRevision" Relation="" Form=""
+				PlmField="item_id" SapComponent="MATNR" DataType="CHAR" Length="18"
+				SapField="MATNR" Text="物料号" RegularExpression="" DefaultValue=""
+				IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_hylx" DataType="CHAR"
+				Length="1" SapComponent="MBRSH" SapField="MBRSH" Text="行业领域"
+				RegularExpression="" DefaultValue="M" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_wllx" DataType="CHAR"
+				Length="4" SapComponent="MTART" SapField="MTART" Text="物料类型"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_gc" DataType="CHAR"
+				Length="4" SapComponent="WERKS" SapField="WERKS" Text="工厂"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_xszz" DataType="CHAR"
+				Length="4" SapComponent="VKORG" SapField="VKORG" Text="销售组织"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_fxjd" DataType="CHAR"
+				Length="2" SapComponent="VTWEG" SapField="VTWEG" Text="分销渠道"
+				RegularExpression="" DefaultValue="11" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_wlms" DataType="CHAR"
+				Length="40" SapComponent="MAKTE" SapField="MAKTE" Text="物料描述(短文本)"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="40" SapComponent="MAKTC" SapField="MAKTC"
+				Text="物料描述(短文本)" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_dw" DataType="UNIT"
+				Length="3" SapComponent="MEINS" SapField="MEINS" Text="基本计量单位"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_wlz" DataType="CHAR"
+				Length="9" SapComponent="MATKL" SapField="MATKL" Text="物料组"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_wbwlz" DataType="CHAR"
+				Length="18" SapComponent="EXTWG" SapField="EXTWG" Text="外部物料组"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_jiuhao" DataType="CHAR"
+				Length="18" SapComponent="BISMT" SapField="BISMT" Text="旧物料号"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_cpz" DataType="CHAR"
+				Length="2" SapComponent="SPART" SapField="SPART" Text="产品组"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_xxlbz" DataType="CHAR"
+				Length="4" SapComponent="MTPOS" SapField="MTPOS" Text="来自物料主文件的项目类别组"
+				RegularExpression="" DefaultValue="" IsEmpty="True" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_mz" DataType="QUAN"
+				Length="13" SapComponent="BRGEW" SapField="BRGEW" Text="毛重"
+				RegularExpression="" DefaultValue="" IsEmpty="True" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_jz" DataType="QUAN"
+				Length="13" SapComponent="NTGEW" SapField="NTGEW" Text="净重"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_zldw" DataType="UNIT"
+				Length="3" SapComponent="GEWEI" SapField="GEWEI" Text="重量单位"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="QUAN" Length="13" SapComponent="VOLUM" SapField="VOLUM"
+				Text="业务量" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="UNIT" Length="3" SapComponent="VOLEH" SapField="VOLEH"
+				Text="体积单位" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="18" SapComponent="NORMT" SapField="NORMT"
+				Text="行业标准描述（例如 ANSI 或 ISO）" RegularExpression="" DefaultValue=""
+				IsEmpty="True" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="32" SapComponent="GROES" SapField="GROES"
+				Text="大小/量纲" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_x" DataType="DEC" Length="5"
+				SapComponent="UMREN" SapField="UMREN" Text="转换为基本计量单位的分母"
+				RegularExpression="" DefaultValue="" IsEmpty="True" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_xdw" DataType="UNIT"
+				Length="3" SapComponent="MEINH" SapField="MEINH" Text="用于显示的计量单位"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_y" DataType="DEC" Length="5"
+				SapComponent="UMREZ" SapField="UMREZ" Text="基本计量单位转换分子"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="QUAN" Length="13" SapComponent="LAENG" SapField="LAENG"
+				Text="长度" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="QUAN" Length="13" SapComponent="BREIT" SapField="BREIT"
+				Text="宽度" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="QUAN" Length="13" SapComponent="HOEHE" SapField="HOEHE"
+				Text="高度" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="UNIT" Length="3" SapComponent="MEABM" SapField="MEABM"
+				Text="长度/宽度/高度的尺寸单位" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="UNIT" Length="3" SapComponent="MESUB" SapField="MESUB"
+				Text="包装层次中的低层计量单位" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="QUAN" Length="13" SapComponent="VOLUA" SapField="VOLUA"
+				Text="业务量" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="UNIT" Length="3" SapComponent="VOLEA" SapField="VOLEA"
+				Text="体积单位" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="QUAN" Length="13" SapComponent="BRGEA" SapField="BRGEA"
+				Text="毛重" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="QUAN" Length="13" SapComponent="NTGEA" SapField="NTGEA"
+				Text="净重" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="UNIT" Length="3" SapComponent="GEWEA" SapField="GEWEA"
+				Text="重量单位" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="4" SapComponent="DWERK" SapField="DWERK"
+				Text="交货工厂" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_gj" DataType="CHAR"
+				Length="3" SapComponent="ALAND" SapField="ALAND" Text="发货国(由该国家发货)"
+				RegularExpression="" DefaultValue="CN" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_sslb" DataType="CHAR"
+				Length="4" SapComponent="TATYP" SapField="TATYP" Text="税类别(营业税，联邦营业税，...)"
+				RegularExpression="" DefaultValue="MWST" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_sfl" DataType="CHAR"
+				Length="1" SapComponent="TAXKM" SapField="TAXKM" Text="物料的税分类"
+				RegularExpression="" DefaultValue="1" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_zxpl" DataType="QUAN"
+				Length="13" SapComponent="AUMNG" SapField="AUMNG" Text="以基准计量单位计量的最小订购量"
+				RegularExpression="" DefaultValue="" IsEmpty="True" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_kmszz" DataType="CHAR"
+				Length="2" SapComponent="KTGRM" SapField="KTGRM" Text="该物料的科目设置组"
+				RegularExpression="" DefaultValue="01" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="4" SapComponent="MTPOV" SapField="MTPOV"
+				Text="来自物料主文件的项目类别组" RegularExpression="" DefaultValue="01" IsEmpty="False"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="3" SapComponent="MVGR1" SapField="MVGR1"
+				Text="物料组1" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="3" SapComponent="MVGR2" SapField="MVGR3"
+				Text="物料组2" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="3" SapComponent="MVGR3" SapField="MVGR3"
+				Text="物料组3" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_ysz" DataType="CHAR"
+				Length="4" SapComponent="TRAGR" SapField="TRAGR" Text="运输组"
+				RegularExpression="" DefaultValue="0001" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_kydjc" DataType="CHAR"
+				Length="2" SapComponent="MTVFP" SapField="MTVFP" Text="可用性检查的检查组"
+				RegularExpression="" DefaultValue="02" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_zzz" DataType="CHAR"
+				Length="4" SapComponent="LADGR" SapField="LADGR" Text="装载组"
+				RegularExpression="" DefaultValue="0001" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_cgz" DataType="CHAR"
+				Length="3" SapComponent="EKGRP" SapField="EKGRP" Text="采购组"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="UNIT" Length="3" SapComponent="BSTME" SapField="BSTME"
+				Text="采购订单的计量单位" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="17" SapComponent="STAWN" SapField="STAWN"
+				Text="外贸的商品代码和进口代码" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="4" SapComponent="MTVER" SapField="MTVER"
+				Text="出口/进口物料组" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="1" SapComponent="KORDB" SapField="KORDB"
+				Text="标识: 源清单要求" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="1" SapComponent="USEQU" SapField="USEQU"
+				Text="配额分配使用" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="1" SapComponent="XCHPP" SapField="XCHPP"
+				Text="批次管理需求的标识" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="4" SapComponent="MPROF" SapField="MPROF"
+				Text="制造商部件参数文件" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="40" SapComponent="MFRPN" SapField="MFRPN"
+				Text="制造商零件编号" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="10" SapComponent="MFRNR" SapField="MFRNR"
+				Text="制造商编号" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_gctdwlzt" DataType="CHAR"
+				Length="2" SapComponent="MMSTA" SapField="MMSTA" Text="工厂特定的物料状态"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="DATS" Length="8" SapComponent="MMSTD" SapField="MMSTD"
+				Text="工厂特定物料状态有效的起始日期" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_MRPlx" DataType="CHAR"
+				Length="2" SapComponent="DISMM" SapField="DISMM" Text="物料需求计划类型"
+				RegularExpression="" DefaultValue="PD" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_MRPkzy" DataType="CHAR"
+				Length="3" SapComponent="DISPO" SapField="DISPO" Text="MRP 控制者（物料计划人）"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_pldx" DataType="CHAR"
+				Length="2" SapComponent="DISLS" SapField="DISLS" Text="批量 (物料计划)"
+				RegularExpression="" DefaultValue="EX" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="1" SapComponent="MAABC" SapField="MAABC"
+				Text="ABC标识" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_zxpl" DataType="QUAN"
+				Length="13" SapComponent="BSTMI" SapField="BSTMI" Text="最小批量"
+				RegularExpression="" DefaultValue="0" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_srz" DataType="QUAN"
+				Length="13" SapComponent="BSTRF" SapField="BSTRF" Text="采购订单数量的舍入值"
+				RegularExpression="" DefaultValue="" IsEmpty="True" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_cglx" DataType="CHAR"
+				Length="1" SapComponent="BESKZ" SapField="BESKZ" Text="采购类型"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_tscg" DataType="CHAR"
+				Length="2" SapComponent="SOBSL" SapField="SOBSL" Text="特殊采购类型"
+				RegularExpression="" DefaultValue="" IsEmpty="True" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="1" SapComponent="RGEKZ" SapField="RGEKZ"
+				Text="标识：反冲" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_scsj" DataType="DEC"
+				Length="3" SapComponent="DZEIT" SapField="DZEIT" Text="厂内生产时间"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_jhjhsj" DataType="DEC"
+				Length="3" SapComponent="PLIFZ" SapField="PLIFZ" Text="计划的天数内交货"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_shclsj" DataType="DEC"
+				Length="3" SapComponent="WEBAZ" SapField="WEBAZ" Text="以天计的收货处理时间"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_pcfjm" DataType="CHAR"
+				Length="3" SapComponent="FHORI" SapField="FHORI" Text="浮动的计划边际码"
+				RegularExpression="" DefaultValue="000" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_scccdd" DataType="CHAR"
+				Length="4" SapComponent="LGPRO" SapField="LGPRO" Text="发货库存地点"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_wbcgccdd" DataType="CHAR"
+				Length="4" SapComponent="LGFSB" SapField="LGFSB" Text="外部采购的缺省仓储位置"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="QUAN" Length="13" SapComponent="EISLO" SapField="EISLO"
+				Text="最小安全库存" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="QUAN" Length="13" SapComponent="EISBE" SapField="EISBE"
+				Text="安全库存" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_clqz" DataType="CHAR"
+				Length="2" SapComponent="STRGR" SapField="STRGR" Text="计划策略组"
+				RegularExpression="" DefaultValue="40" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_hyms" DataType="CHAR"
+				Length="1" SapComponent="VRMOD" SapField="VRMOD" Text="消耗模式"
+				RegularExpression="" DefaultValue="2" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_xhhyqj" DataType="NUMC"
+				Length="3" SapComponent="VINT1" SapField="VINT1" Text="消耗期间:逆向"
+				RegularExpression="" DefaultValue="999" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_xqhyqj" DataType="NUMC"
+				Length="3" SapComponent="VINT2" SapField="VINT2" Text="消耗时期-向前"
+				RegularExpression="" DefaultValue="999" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="1" SapComponent="MISKZ" SapField="MISKZ"
+				Text="综合MRP标识" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_kydjc" DataType="CHAR"
+				Length="2" SapComponent="MTVFM" SapField="MTVFM" Text="可用性检查的检查组"
+				RegularExpression="" DefaultValue="02" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="1" SapComponent="SBDKZ" SapField="SBDKZ"
+				Text="对于独立和集中需求的相关需求标识" RegularExpression="" DefaultValue=""
+				IsEmpty="True" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_scpcy" DataType="CHAR"
+				Length="3" SapComponent="FEVOR" SapField="FEVOR" Text="生产管理员"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_scjhcs" DataType="CHAR"
+				Length="6" SapComponent="SFCPF" SapField="SFCPF" Text="生产计划参数文件"
+				RegularExpression="" DefaultValue="000001" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="1" SapComponent="XCHPF" SapField="XCHPF"
+				Text="批次管理需求的标识" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="DEC" Length="3" SapComponent="UEETO" SapField="UEETO"
+				Text="超量交货容差限制" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_gljhyc" DataType="CHAR"
+				Length="1" SapComponent="UEETK" SapField="UEETK" Text="标识：允许未限制的过量交货"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="DEC" Length="5" SapComponent="RUEZT" SapField="RUEZT"
+				Text="建立和拆卸时间 " RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="DEC" Length="5" SapComponent="BEARZ" SapField="BEARZ"
+				Text="处理时间" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="QUAN" Length="13" SapComponent="BASMG" SapField="BASMG"
+				Text="基准数量" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_hjsm" DataType="DEC"
+				Length="4" SapComponent="MHDRZ" SapField="MHDRZ" Text="最短剩余货架寿命"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_pgl" DataType="CHAR"
+				Length="4" SapComponent="BKLAS" SapField="BKLAS" Text="评估类"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_jglx" DataType="CHAR"
+				Length="1" SapComponent="VPRSV" SapField="VPRSV" Text="价格控制指示符"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_jgdw" DataType="DEC"
+				Length="5" SapComponent="PEINH" SapField="PEINH" Text="价格单位"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_wlly" DataType="CHAR"
+				Length="1" SapComponent="HKMAT" SapField="HKMAT" Text="物料相关的源"
+				RegularExpression="" DefaultValue="X" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_cbhspl" DataType="QUAN"
+				Length="13" SapComponent="LOSGR" SapField="LOSGR" Text="计划批量"
+				RegularExpression="" DefaultValue="10000" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="1" SapComponent="NCOST" SapField="NCOST"
+				Text="无成本核算" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_cym" DataType="CHAR"
+				Length="6" SapComponent="AWSLS" SapField="AWSLS" Text="差异码"
+				RegularExpression="" DefaultValue="000001" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_lrzx" DataType="CHAR"
+				Length="10" SapComponent="PRCTR" SapField="PRCTR" Text="利润中心"
+				RegularExpression="" DefaultValue="1000" IsEmpty="False" Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="DEC" Length="23" SapComponent="ZPLP1" SapField="ZPLP1"
+				Text="未来计划价格1" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="10" SapComponent="KOSGR" SapField="KOSGR"
+				Text="成本核算间接费用组" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="18" SapComponent="CLASS" SapField="CLASS"
+				Text="类号" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="3" SapComponent="KLART" SapField="KLART"
+				Text="类别种类" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" />
+		</Table>
+
+		<Table Name="RETURN" IsReturn="True">
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField="TYPE"
+				DataType="CHAR" Length="1" SapComponent="TYPE" SapField="TYPE" Text="消息类型" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField="MESSAGE"
+				DataType="CHAR" Length="220" SapComponent="MESSAGE" SapField="MESSAGE"
+				Text="消息文本" />
+		</Table>
+	</Function>
+
+	<!--BOM传递 -->
+	<Function Name="BomTOSap" Text="传递BOM" FunctionName="ZPLM_MAINTAIN_BOM">
+		<!--PlmInfoType: 填充表的所需要对象 Relation 对象关系，如无对象关系，属性直接获取对象 Form 如有对象关系，属性直接从表单上获取 
+			DataType： SAP对应的数据类型 Length : SAP字段长度，在传递前需要检查 SapComponent,SapField ： SAP字段名 
+			Text: SAP字段本地化，用来检查抛出错误使用 System: 表明此字段是系统使用 I,U -->
+		<FieldConfig Name="kh3_MODEL" PlmInfoType="PartRevision" Relation="" Form=""
+			PlmField="kh3_MODEL" DataType="CHAR" Length="1" SapComponent="MODEL"
+			SapField="MODEL" Text="模式" System="True" />
+		<!--Name: 表名 IsReturn: 此表是否是返回表 TableSource: BomLine 表示数据从BomLine上获取 -->
+		<Table Name="ZPLM_BOM" IsReturn="False" TablelSource="BomLine">
+			<!--RegularExpression: 正则表达式，用来校验属性格式 DefaultValue: 默认值，在填写默认值的情况下，如字段名为空，则采用此值传递 
+				IsEmpty: 是否允许为空， 不区分True,False 大小写 Format: 数据格式化等同String.Format -->
+			<FieldConfig Name="" PlmInfoType="PartRevision" Relation="" Form=""
+				PlmField="item_id" DataType="CHAR" Length="18" SapComponent="matnr"
+				SapField="matnr" Text="物料编号" RegularExpression="" DefaultValue=""
+				IsEmpty="False" Format="" FieldType="Parent" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_gc" DataType="CHAR"
+				Length="4" SapComponent="werks" SapField="werks" Text="工厂"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format=""
+				FieldType="Parent" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_base_quan" DataType="CHAR"
+				Length="17" SapComponent="base_quan" SapField="base_quan" Text="基本数量"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format=""
+				FieldType="Parent" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_BASE_UNIT" DataType="CHAR"
+				Length="3" SapComponent="BASE_UNIT" SapField="BASE_UNIT" Text="基本数量的计量单位"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format=""
+				FieldType="Parent" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_wlms" DataType="CHAR"
+				Length="40" SapComponent="Wlms1" SapField="Wlms1" Text="物料描述1"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format=""
+				FieldType="Parent" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="IMAN_master_form_rev"
+				Form="Part Revision Master" PlmField="kh3_DATUV" DataType="DATE"
+				Length="8" SapComponent="DATUV" SapField="DATUV" Text="有效日期自"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format=""
+				FieldType="Parent" />
+			<!--SapField="Wlms2" Text="物料描述2"拼接取值Parent版本属性object_name、版本表单属性kh3_cpdh 
+				<FieldConfig PlmInfoType="" Relation="" Form ="" PlmField="" DataType="CHAR" 
+				Length="40" SapComponent="Wlms2" SapField="Wlms2" Text="物料描述2" RegularExpression="" 
+				DefaultValue="" IsEmpty="True" Format="" FieldType="Parent"/> -->
+
+			<FieldConfig PlmInfoType="PartRevision" Relation="" Form=""
+				PlmField="item_id" DataType="CHAR" Length="18" SapComponent="matnr"
+				SapField="matnr" Text="物料编号" RegularExpression="" DefaultValue=""
+				IsEmpty="False" Format="" FieldType="Child" />
+			<!-- 这个有问题 -->
+			<FieldConfig PlmInfoType="PartRevision" Relation="structure_revisions"
+				Form="BOMView Revision" PlmField="bl_occ_int_item_no" DataType="CHAR"
+				Length="4" SapComponent="item_no" SapField="item_no" Text="项目序号"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format=""
+				FieldType="BomLine" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="structure_revisions"
+				Form="BOMView Revision" PlmField="bl_child_id" DataType="CHAR"
+				Length="18" SapComponent="component" SapField="component" Text="组件"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format=""
+				FieldType="BomLine" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="structure_revisions"
+				Form="BOMView Revision" PlmField="KH3_item_categ" DataType="CHAR"
+				Length="1" SapComponent="item_categ" SapField="item_categ" Text="项目类型"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format=""
+				FieldType="BomLine" />
+			<!--SapField="ITEM_TEXT1" Text="组件描述1"拼接取值Child版本属性object_name、版本表单属性kh3_cpdh -->
+			<FieldConfig PlmInfoType="PartRevision" Relation="structure_revisions"
+				Form="BOMView Revision" PlmField="bl_occ_int_order_no" DataType="CHAR"
+				Length="40" SapComponent="ITEM_TEXT1" SapField="ITEM_TEXT1" Text="组件描述1"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format=""
+				FieldType="BomLine" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="40" SapComponent="ITEM_TEXT2" SapField="ITEM_TEXT2"
+				Text="组件描述2" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" FieldType="BomLine" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="structure_revisions"
+				Form="BOMView Revision" PlmField="bl_quantity" DataType="CHAR"
+				Length="17" SapComponent="comp_qty" SapField="comp_qty" Text="组件数量"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format=""
+				FieldType="BomLine" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="structure_revisions"
+				Form="BOMView Revision" PlmField="kh3_BASE_UNIT" DataType="CHAR"
+				Length="3" SapComponent="COMP_UNIT" SapField="COMP_UNIT" Text="组件单位"
+				RegularExpression="" DefaultValue="" IsEmpty="False" Format=""
+				FieldType="BomLine" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="CHAR" Length="17" SapComponent="COMP_SCRAP" SapField="COMP_SCRAP"
+				Text="组件报废" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" FieldType="BomLine" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField=""
+				DataType="QUAN" Length="13" SapComponent="FIXED_QTY" SapField="FIXED_QTY"
+				Text="固定数量" RegularExpression="" DefaultValue="" IsEmpty="True"
+				Format="" FieldType="BomLine" />
+		</Table>
+		<Table Name="RETURN" IsReturn="True">
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField="TYPE"
+				DataType="CHAR" Length="1" SapComponent="TYPE" SapField="TYPE" Text="消息类型" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField="MESSAGE"
+				DataType="CHAR" Length="220" SapComponent="MESSAGE" SapField="MESSAGE"
+				Text="消息文本" />
+		</Table>
+	</Function>
+
+	<!--工艺路线传递 -->
+	<!--BOM传递 -->
+	<Function Name="ZPLM_MAINTAIN_ROUTING" Text="传递工艺路线"
+		FunctionName="ZPLM_MAINTAIN_ROUTING" ReturenTable="ZPLM_ROUTING"
+		ReflectionKey="SapComponent">
+		<!--PlmInfoType: 填充表的所需要对象 Relation 对象关系，如无对象关系，属性直接获取对象 Form 如有对象关系，属性直接从表单上获取 
+			DataType： SAP对应的数据类型 Length : SAP字段长度，在传递前需要检查 SapComponent,SapField ： SAP字段名 
+			Text: SAP字段本地化，用来检查抛出错误使用 System: 表明此字段是系统使用 I,U -->
+		<FieldConfig PlmInfoType="MEProcessRevision" Relation=""
+			Form="" PlmField="kh3_MODEL" DataType="CHAR" Length="1" SapComponent="MODEL"
+			SapField="MODEL" Text="模式" System="True" />
+		<!--Name: 表名 IsReturn: 此表是否是返回表 TableSource: BomLine 表示数据从BomLine上获取 -->
+		<Table Name="ZPLM_ROUTING" IsReturn="False" TablelSource="BomLine">
+			<!--RegularExpression: 正则表达式，用来校验属性格式 DefaultValue: 默认值，在填写默认值的情况下，如字段名为空，则采用此值传递 
+				IsEmpty: 是否允许为空， 不区分True,False 大小写 Format: 数据格式化等同String.Format -->
+			<FieldConfig PlmInfoType="MEProcessRevision" Relation="Part Revision Master"
+				Form="" PlmField="kh3_wllx" DataType="String" Length="128"
+				SapComponent="MTART" SapField="MTART" Text="物料类型" RegularExpression=""
+				DefaultValue="10010101" IsEmpty="True" Format="" FieldType="Parent" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="Part Revision Master"
+				Form="" PlmField="kh3_wllx" DataType="String" Length="128"
+				SapComponent="MTART" SapField="MTART" Text="物料类型" RegularExpression=""
+				DefaultValue="10010101" IsEmpty="True" Format="" FieldType="Child" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField="kh3_wllx"
+				DataType="String" Length="128" SapComponent="MTART" SapField="MTART"
+				Text="物料类型" RegularExpression="" DefaultValue="10010101" IsEmpty="True"
+				Format="" FieldType="BomLine" />
+		</Table>
+		<Table Name="RETURN" IsReturn="True">
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField="TYPE"
+				DataType="CHAR" Length="1" SapComponent="TYPE" SapField="TYPE" Text="消息类型" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField="MESSAGE"
+				DataType="CHAR" Length="220" SapComponent="MESSAGE" SapField="MESSAGE"
+				Text="消息文本" />
+		</Table>
+	</Function>
+	<!--库存查询 -->
+	<Function Name="SAPInventory" Text="库存查询" FunctionName="ZMM_GETINVENTORY"
+		IsMainFunction="False" ConditionFunc="" ExistFunc="" ExistStatus="更改"
+		ReturenType="" RetrueMsg="" ItemType="BOM" Status="新建">
+		<FieldConfig PlmInfoType="PARTNUMBER" SapComponent="I_MATNR"
+			SapField="I_MATNR" Text="物料号" />
+		<Table Name="T_MARD" TableSource="Self" Return="true" ReturnMsg=""
+			ReturnType="" UpdatePlm="true">
+			<FieldConfig PlmInfoType="" SapComponent="MATNR"
+				SapField="MATNR" Text="物料号" />
+			<FieldConfig PlmInfoType="" SapComponent="MAKTX"
+				SapField="MAKTX" Text="物料描述" />
+			<FieldConfig PlmInfoType="" SapComponent="WERKS"
+				SapField="WERKS" Text="工厂" />
+			<FieldConfig PlmInfoType="" SapComponent="LGORT"
+				SapField="LGORT" Text="库存地点" />
+			<FieldConfig PlmInfoType="" SapComponent="SMENG"
+				SapField="SMENG" Text="汇总数" />
+			<FieldConfig PlmInfoType="" SapComponent="MEINS"
+				SapField="MEINS" Text="基本计量单位" />
+		</Table>
+	</Function>
+</SAPConfig>

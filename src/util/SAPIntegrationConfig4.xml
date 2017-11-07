@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SAPConfig version="1.0">
+	<!--接口、服务器配置 -->
+	<Organize Name="KHYJ" Text="康华-DEV" AppServerHost="192.168.90.102"
+		SystemNumber="00" SystemID="DEV" User="khplmcs" Password="12345678"
+		Client="120" Language="ZH" PoolSize="5" IdleTimeout="600"
+		JCO_PEAK_LIMIT="10" />
+	<!--物料传递 -->
+	<Function Name="PartTOSap" Text="传递物料到SAP" FunctionName="ZPLM_MAINTAIN_MAT"
+		IsMainFunction="True" ConditionFunc="" ExistStatus="更改" ReturenType=""
+		RetrueMsg="" ItemType="Part" Status="新建">
+		<Table Name="T_MARA" TableSource="Self" Return="true" ReturnMsg="MS_MESSAGE"
+			ReturnType="MS_TYPE" RowField="" UpdatePlm="true">
+			<FieldConfig PlmInfoType="PART.Rev.item_id" SapComponent="MATNR"
+				SapField="MATNR" Text="物料号" />
+			<FieldConfig PlmInfoType="PART.Rev.kh3_MODEL"
+				SapComponent="MODEL" SapField="MODEL" Text="模式" />
+			<!--<FieldConfig PlmInfoType="PART.Rev.kh3_MODEL" SapComponent="MBRSH" 
+				SapField="MBRSH" Text="行业领域" /> -->
+			<FieldConfig PlmInfoType="Part" PlmSite="Part Revision Master"
+				PlmPro="kh3_wllx" DataType="String[128]" SapComponent="MTART"
+				SapField="MTART" Text="物料类型" />
+			<FieldConfig PlmInfoType="Part" PlmSite="Part Revision Master"
+				PlmPro="kh3_gc" SapComponent="WERKS" SapField="WERKS" Text="工厂" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_xszz" SapComponent="VKORG" SapField="VKORG" Text="销售组织" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_fxjd" SapComponent="VTWEG" SapField="VTWEG" Text="分销渠道" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_makte" SapComponent="MAKTE" SapField="MAKTE" Text="物料描述（短文本）" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_maktc" SapComponent="MAKTC" SapField="MAKTC" Text="物料描述（短文本）" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_meins" SapComponent="MEINS" SapField="MEINS" Text="基本计量单位" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_wlz" SapComponent="MATKL" SapField="MATKL" Text="物料组" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_wbwlz" SapComponent="EXTWG" SapField="EXTWG" Text="外部物料组" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_jiuhao" SapComponent="BISMT" SapField="BISMT" Text="旧物料号" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_cpz" SapComponent="SPART" SapField="SPART" Text="产品组" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_ptxmlbz" SapComponent="MTPOS" SapField="MTPOS" Text="来自物料主文件的项目类别组 " />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_jz" SapComponent="NTGEW" SapField="NTGEW" Text="净重" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_zldw" SapComponent="GEWEI" SapField="GEWEI" Text="重量单位" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_meinh" SapComponent="MEINH" SapField="MEINH" Text="用于显示的计量单位" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_umrez" SapComponent="UMREZ" SapField="UMREZ" Text="基本计量单位转换分子" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_cgz" SapComponent="EKGRP" SapField="EKGRP" Text="采购组" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_gctdwlzt" SapComponent="MMSTA" SapField="MMSTA" Text="工厂特定的物料状态" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_MRPkzy" SapComponent="DISPO" SapField="DISPO" Text="MRP 控制者（物料计划人）" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_cglx" SapComponent="BESKZ" SapField="BESKZ" Text="采购类型" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_dzeit" SapComponent="DZEIT" SapField="DZEIT" Text="厂内生产时间" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_jhjhsj" SapComponent="PLIFZ" SapField="PLIFZ" Text="计划的天数内交货" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_shclsj" SapComponent="WEBAZ" SapField="WEBAZ" Text="以天计的收货处理时间" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_lgpro" SapComponent="LGPRO" SapField="LGPRO" Text="发货库存地点" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_wbcgccdd" SapComponent="LGFSB" SapField="LGFSB" Text="外部采购的缺省仓储位置" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_zdaqkc" SapComponent="EISLO" SapField="EISLO" Text="最小安全库存" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_aqkc" SapComponent="EISBE" SapField="EISBE" Text="安全库存" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_scpcy" SapComponent="FEVOR" SapField="FEVOR" Text="生产管理员" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_gljhyc" SapComponent="UEETO" SapField="UEETO" Text="超量交货容差限制" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_hjsm" SapComponent="MHDRZ" SapField="MHDRZ" Text="最短剩余货架寿命" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_pgl" SapComponent="BKLAS" SapField="BKLAS" Text="评估类" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_jglx" SapComponent="VPRSV" SapField="VPRSV" Text="价格控制指示符" />
+			<FieldConfig PlmInfoType="PART" PlmSite="Part Revision Master"
+				PlmPro="kh3_jgdw" SapComponent="PEINH" SapField="PEINH" Text="价格单位" />
+			<!--<FieldConfig PlmInfoType="GEWEI" SapComponent="EKGRP" SapField="EKGRP" 
+				Text="采购组" /> <FieldConfig PlmInfoType="GEWEI" SapComponent="EKGRP" SapField="EKGRP" 
+				Text="采购组" /> <FieldConfig PlmInfoType="GEWEI" SapComponent="EKGRP" SapField="EKGRP" 
+				Text="采购组" /> <FieldConfig PlmInfoType="GEWEI" SapComponent="EKGRP" SapField="EKGRP" 
+				Text="采购组" /> -->
+
+
+			<!--<FieldConfig PlmInfoType="PARTNUMBER" SapComponent="MATNR" SapField="MATNR" 
+				Text="物料号" Convert="ToPadLeft18"/> <FieldConfig PlmInfoType="PART.Rev.item_id" 
+				SapComponent="MATNR" SapField="MATNR" Text="物料号" /> <FieldConfig PlmInfoType="ZMARK" 
+				SapComponent="ZMARK" SapField="ZMARK" Text="更新标示" /> <FieldConfig PlmInfoType="NAME" 
+				SapComponent="MAKTX" SapField="MAKTX" Text="物料描述" /> <FieldConfig PlmInfoType="MAKEN" 
+				SapComponent="MAKEN" SapField="MAKEN" Text="英文物料描述" /> <FieldConfig PlmInfoType="HYLY" 
+				SapComponent="MBRSH" SapField="MBRSH" Text="行业领域" /> <FieldConfig PlmInfoType="SHIYANSHI" 
+				SapComponent="LABOR" SapField="LABOR" Text="实验室/设计室" /> <FieldConfig PlmInfoType="CPFP" 
+				SapComponent="KOSCH" SapField="KOSCH" Text="产品分配" /> -->
+			<!-- </Table> <Table Name="T_Part" TableSource="LINK" LinkType="PRODUCTLINKPLANT" 
+				RowField="" UpdatePlm="true"> <FieldConfig InfoSource="PARENT" PlmInfoType="PARTNUMBER" 
+				SapComponent="MATNR" SapField="MATNR" Text="物料号" Convert="ToPadLeft18"/> 
+				<FieldConfig InfoSource="CHILD" PlmInfoType="P_PLANT" SapComponent="WERKS" 
+				SapField="WERKS" Text="工厂"/> <FieldConfig InfoSource="PARENT" PlmInfoType="ZMARK" 
+				SapComponent="ZMARK" SapField="ZMARK" Text="更新标示"/> <FieldConfig InfoSource="LINK" 
+				PlmInfoType="BOMGXBS" SapComponent="ZMARK" SapField="ZMARK" Text="更新标示" /> 
+				<FieldConfig InfoSource="CHILD" PlmInfoType="LLZX" SapComponent="PRCTR" SapField="PRCTR" 
+				Text="利润中心"/> <FieldConfig InfoSource="PARENT" PlmInfoType="XCHPF" SapComponent="XCHPF" 
+				SapField="XCHPF" Text="批次管理" /> -->
+		</Table>
+	</Function>
+
+	<!--BOM传递 -->
+	<Function Name="BomTOSap" Text="传递多层BOM到SAP" FunctionName="ZMM_CREATBOM"
+		IsMainFunction="True" ConditionFunc="" ExistFunc="" ExistStatus="更改"
+		ReturenType="" RetrueMsg="" ItemType="BOM" Status="新建">
+		<Table Name="T_STKO" TableSource="Self" Return="true" ReturnMsg=""
+			ReturnType="MSG_TYPE" RowField="" UpdatePlm="true">
+			<FieldConfig PlmInfoType="PARTNUMBER" SapComponent="MATNR"
+				SapField="MATNR" Text="物料号" />
+			<FieldConfig PlmInfoType="P_PLANT" SapComponent="WERKS"
+				SapField="WERKS" Text="工厂" />
+			<!--<FieldConfig PlmInfoType="BOMCDBJ" SapComponent="ZMARK" SapField="ZMARK" 
+				Text="更新标示" /> -->
+			<FieldConfig PlmInfoType="STLAN" SapComponent="STLAN"
+				SapField="STLAN" Text="BOM用途" />
+			<FieldConfig PlmInfoType="STLAL" SapComponent="STLAL"
+				SapField="STLAL" Text="可选的BOM" />
+			<FieldConfig PlmInfoType="BOM_NO" SapComponent="BOM_NO"
+				SapField="BOM_NO" Text="物料单" UpdatePlm="true" />
+			<FieldConfig PlmInfoType="DATUV" SapComponent="DATUV"
+				SapField="DATUV" Text="有效日期" />
+			<FieldConfig PlmInfoType="BASE_QUAN" SapComponent="BASE_QUAN"
+				SapField="BASE_QUAN" Text="基准数量" />
+			<FieldConfig PlmInfoType="BASE_UNIT" SapComponent="BASE_UNIT"
+				SapField="BASE_UNIT" Text="BOM 基本单位" />
+			<FieldConfig PlmInfoType="BOM_STATUS" SapComponent="BOM_STATUS"
+				SapField="BOM_STATUS" Text="BOM 状态" />
+			<FieldConfig PlmInfoType="BOM_TEXT" SapComponent="BOM_TEXT"
+				SapField="BOM_TEXT" Text="BOM 文本" />
+			<FieldConfig PlmInfoType="ALT_TEXT" SapComponent="ALT_TEXT"
+				SapField="ALT_TEXT" Text="可选 BOM 文本" />
+			<FieldConfig PlmInfoType="LOT_SIZE_FROM" SapComponent="LOT_SIZE_FROM"
+				SapField="LOT_SIZE_FROM" Text="从批量" />
+			<FieldConfig PlmInfoType="LOT_SIZE_TO" SapComponent="LOT_SIZE_TO"
+				SapField="LOT_SIZE_TO" Text="到批量" />
+		</Table>
+		<Table Name="T_STPO" TableSource="LINK" LinkType="PARTEBOM"
+			RowField="" UpdatePlm="true">
+			<FieldConfig InfoSource="PARENT" PlmInfoType="PARTNUMBER"
+				SapComponent="MATNR" SapField="MATNR" Text="物料号" />
+			<FieldConfig InfoSource="PARENT" PlmInfoType="P_PLANT"
+				SapComponent="WERKS" SapField="WERKS" Text="工厂" />
+			<FieldConfig InfoSource="PARENT" PlmInfoType="STLAN"
+				SapComponent="STLAN" SapField="STLAN" Text="BOM 用途" />
+			<FieldConfig InfoSource="PARENT" PlmInfoType="STLAL"
+				SapComponent="STLAL" SapField="STLAL" Text="可选的 BOM" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="ITEMCATEG"
+				SapComponent="ITEM_CATEG" SapField="ITEM_CATEG" Text="项目类别(物料单)" />
+			<FieldConfig InfoSource="CHILD" PlmInfoType="PARTNUMBER"
+				SapComponent="COMPONENT" SapField="COMPONENT" Text="BOM 组件" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="PLMQUANTITY"
+				SapComponent="COMP_QTY" SapField="COMP_QTY" Text="组件数量 (BTCI)"
+				Convert="ToString" />
+			<!--<FieldConfig InfoSource="LINK" PlmInfoType="BASEUNIT" SapComponent="COMP_UNIT" 
+				SapField="COMP_UNIT" Text="组件计量单位" /> -->
+			<FieldConfig InfoSource="LINK" PlmInfoType="ITEMTEXT1"
+				SapComponent="ITEM_TEXT1" SapField="ITEM_TEXT1" Text="BOM 项目文本（行1）" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="ITEMTEXT2"
+				SapComponent="ITEM_TEXT2" SapField="ITEM_TEXT2" Text="BOM 项目文本（行2）" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="ZZPOTX3"
+				SapComponent="ZZPOTX3" SapField="ZZPOTX3" Text="BOM 项目文本（行3）" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="ZZPOTX4"
+				SapComponent="ZZPOTX4" SapField="ZZPOTX4" Text="BOM 项目文本（行4）" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="COMPSCRAP"
+				SapComponent="COMP_SCRAP" SapField="COMP_SCRAP" Text="部件废品率" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="ISSUELOC"
+				SapComponent="ISSUE_LOC" SapField="ISSUE_LOC" Text="发货地点(库存地)" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="ISSUELOC"
+				SapComponent="ISSUE_LOC" SapField="ISSUE_LOC" Text="发货地点(库存地)" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="STPOALPGR"
+				SapComponent="AI_GROUP" SapField="AI_GROUP" Text="替代项目组" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="STPOALPRF"
+				SapComponent="AI_PRIO" SapField="AI_PRIO" Text="优先级" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="STPOALPST"
+				SapComponent="AI_STRATEG" SapField="AI_STRATEG" Text="替代策略" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="STPOEWAHR"
+				SapComponent="USAGE_PROB" SapField="USAGE_PROB" Text="使用可能性" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="ITEM_NO"
+				SapComponent="ITEM_NO" SapField="ITEM_NO" Text="项目顺序号" Verify="true"
+				RegularExpression="^(\d{4})$" />
+		</Table>
+		<Table Name="T_RETURN" TableSource="Self" Return="true"
+			ReturnMsg="MSG_TXT" ReturnType="">
+			<FieldConfig PlmInfoType="" SapComponent="MATNR"
+				SapField="MATNR" Text="物料号" />
+			<FieldConfig PlmInfoType="" SapComponent="WERKS"
+				SapField="WERKS" Text="工厂" />
+			<FieldConfig PlmInfoType="" SapComponent="MSG_TYPE"
+				SapField="MSG_TYPE" Text="消息类型" />
+			<FieldConfig PlmInfoType="" SapComponent="MSG_TXT"
+				SapField="MSG_TXT" Text="消息文本" />
+		</Table>
+	</Function>
+	<Function Name="BomTOSapSpec" Text="传递多层BOM到SAP(无损耗率)"
+		FunctionName="ZMM_CREATBOM" IsMainFunction="True" ConditionFunc=""
+		ExistFunc="" ExistStatus="更改" ReturenType="" RetrueMsg="" ItemType="BOM"
+		Status="新建">
+		<Table Name="T_STKO" TableSource="Self" Return="true" ReturnMsg=""
+			ReturnType="MSG_TYPE" RowField="" UpdatePlm="true">
+			<FieldConfig PlmInfoType="PARTNUMBER" SapComponent="MATNR"
+				SapField="MATNR" Text="物料号" />
+			<FieldConfig PlmInfoType="P_PLANT" SapComponent="WERKS"
+				SapField="WERKS" Text="工厂" />
+			<!--<FieldConfig PlmInfoType="BOMCDBJ" SapComponent="ZMARK" SapField="ZMARK" 
+				Text="更新标示" /> -->
+			<FieldConfig PlmInfoType="STLAN" SapComponent="STLAN"
+				SapField="STLAN" Text="BOM用途" />
+			<FieldConfig PlmInfoType="STLAL" SapComponent="STLAL"
+				SapField="STLAL" Text="可选的BOM" />
+			<FieldConfig PlmInfoType="BOM_NO" SapComponent="BOM_NO"
+				SapField="BOM_NO" Text="物料单" UpdatePlm="true" />
+			<FieldConfig PlmInfoType="DATUV" SapComponent="DATUV"
+				SapField="DATUV" Text="有效日期" />
+			<FieldConfig PlmInfoType="BASE_QUAN" SapComponent="BASE_QUAN"
+				SapField="BASE_QUAN" Text="基准数量" />
+			<FieldConfig PlmInfoType="BASE_UNIT" SapComponent="BASE_UNIT"
+				SapField="BASE_UNIT" Text="BOM 基本单位" />
+			<FieldConfig PlmInfoType="BOM_STATUS" SapComponent="BOM_STATUS"
+				SapField="BOM_STATUS" Text="BOM 状态" />
+			<FieldConfig PlmInfoType="BOM_TEXT" SapComponent="BOM_TEXT"
+				SapField="BOM_TEXT" Text="BOM 文本" />
+			<FieldConfig PlmInfoType="ALT_TEXT" SapComponent="ALT_TEXT"
+				SapField="ALT_TEXT" Text="可选 BOM 文本" />
+			<FieldConfig PlmInfoType="LOT_SIZE_FROM" SapComponent="LOT_SIZE_FROM"
+				SapField="LOT_SIZE_FROM" Text="从批量" />
+			<FieldConfig PlmInfoType="LOT_SIZE_TO" SapComponent="LOT_SIZE_TO"
+				SapField="LOT_SIZE_TO" Text="到批量" />
+		</Table>
+		<Table Name="T_STPO" TableSource="LINK" LinkType="PARTEBOM"
+			RowField="" UpdatePlm="true">
+			<FieldConfig InfoSource="PARENT" PlmInfoType="PARTNUMBER"
+				SapComponent="MATNR" SapField="MATNR" Text="物料号" />
+			<FieldConfig InfoSource="PARENT" PlmInfoType="P_PLANT"
+				SapComponent="WERKS" SapField="WERKS" Text="工厂" />
+			<FieldConfig InfoSource="PARENT" PlmInfoType="STLAN"
+				SapComponent="STLAN" SapField="STLAN" Text="BOM 用途" />
+			<FieldConfig InfoSource="PARENT" PlmInfoType="STLAL"
+				SapComponent="STLAL" SapField="STLAL" Text="可选的 BOM" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="ITEMCATEG"
+				SapComponent="ITEM_CATEG" SapField="ITEM_CATEG" Text="项目类别(物料单)" />
+			<FieldConfig InfoSource="CHILD" PlmInfoType="PARTNUMBER"
+				SapComponent="COMPONENT" SapField="COMPONENT" Text="BOM 组件" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="PLMQUANTITY"
+				SapComponent="COMP_QTY" SapField="COMP_QTY" Text="组件数量 (BTCI)"
+				Convert="ToString" />
+			<!--<FieldConfig InfoSource="LINK" PlmInfoType="BASEUNIT" SapComponent="COMP_UNIT" 
+				SapField="COMP_UNIT" Text="组件计量单位" /> -->
+			<FieldConfig InfoSource="LINK" PlmInfoType="ITEMTEXT1"
+				SapComponent="ITEM_TEXT1" SapField="ITEM_TEXT1" Text="BOM 项目文本（行1）" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="ITEMTEXT2"
+				SapComponent="ITEM_TEXT2" SapField="ITEM_TEXT2" Text="BOM 项目文本（行2）" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="ZZPOTX3"
+				SapComponent="ZZPOTX3" SapField="ZZPOTX3" Text="BOM 项目文本（行3）" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="ZZPOTX4"
+				SapComponent="ZZPOTX4" SapField="ZZPOTX4" Text="BOM 项目文本（行4）" />
+			<!--<FieldConfig InfoSource="LINK" PlmInfoType="COMPSCRAP" SapComponent="COMP_SCRAP" 
+				SapField="COMP_SCRAP" Text="部件废品率" /> -->
+			<FieldConfig InfoSource="LINK" PlmInfoType="ISSUELOC"
+				SapComponent="ISSUE_LOC" SapField="ISSUE_LOC" Text="发货地点(库存地)" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="ISSUELOC"
+				SapComponent="ISSUE_LOC" SapField="ISSUE_LOC" Text="发货地点(库存地)" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="STPOALPGR"
+				SapComponent="AI_GROUP" SapField="AI_GROUP" Text="替代项目组" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="STPOALPRF"
+				SapComponent="AI_PRIO" SapField="AI_PRIO" Text="优先级" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="STPOALPST"
+				SapComponent="AI_STRATEG" SapField="AI_STRATEG" Text="替代策略" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="STPOEWAHR"
+				SapComponent="USAGE_PROB" SapField="USAGE_PROB" Text="使用可能性" />
+			<FieldConfig InfoSource="LINK" PlmInfoType="ITEM_NO"
+				SapComponent="ITEM_NO" SapField="ITEM_NO" Text="项目顺序号" Verify="true"
+				RegularExpression="^(\d{4})$" />
+		</Table>
+		<Table Name="T_RETURN" TableSource="Self" Return="true"
+			ReturnMsg="MSG_TXT" ReturnType="">
+			<FieldConfig PlmInfoType="" SapComponent="MATNR"
+				SapField="MATNR" Text="物料号" />
+			<FieldConfig PlmInfoType="" SapComponent="WERKS"
+				SapField="WERKS" Text="工厂" />
+			<FieldConfig PlmInfoType="" SapComponent="MSG_TYPE"
+				SapField="MSG_TYPE" Text="消息类型" />
+			<FieldConfig PlmInfoType="" SapComponent="MSG_TXT"
+				SapField="MSG_TXT" Text="消息文本" />
+		</Table>
+	</Function>
+
+	<!--工艺路线传递 -->
+	<Function Name="RoutingTOSap" FunctionName="ZPLM_MAINTAIN_ROUTING"
+		Text="传递工艺路线到SAP" IsMainFunction="True" ConditionFunc="" ExistFunc=""
+		ExistStatus="更改" ReturenType="" RetrueMsg="" ItemType="BOM" Status="新建" ReflectionKey="SapComponent">
+		<FieldConfig Name="MODEL" fieldName="MODEL" DataType="CHAR"
+			DataLength="1" ImportValue="I/U" Nullable="false" PlmInfoType="PARTNUMBER"
+			SapComponent="MODEL" SapField="MATERIAL" Text="物料号" />
+		<!-- 目前有用的属性 Name：输入表名 IsReturn：是传入表还是返回表 -->
+		<Table Name="ZPLM_ROUTING" IsReturn="false" TableSource="Self"
+			ReturnMsg="MESSAGE" ReturnType="" RowField="" UpdatePlm="true"
+			isTable="true">
+			<!-- 目前有用的属性 SapComponent:SAP参数名 DataType：数据类型 DataLength：数据长度 Nullable：必输入 -->
+			<FieldConfig Name="matnr" Nullable="false" SapComponent="matnr"
+				DataType="CHAR" DataLength="18" PlmInfoType="PLM_matnr" SapField="MATERIAL"
+				Text="物料编号(必输)" stationary="false" />
+			<FieldConfig Name="Werks" Nullable="false" SapComponent="Werks"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_Werks" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="PLNNR" Nullable="true" SapComponent="PLNNR"
+				DataType="CHAR" DataLength="8" PlmInfoType="PLM_PLNNR" SapField="MATERIAL"
+				Text="任务清单组码" stationary="false" />
+			<FieldConfig Name="groupcounter" Nullable="false"
+				SapComponent="groupcounter" DataType="CHAR" DataLength="2"
+				PlmInfoType="PLM_groupcounter" SapField="MATERIAL" Text="组件计数器（必输）"
+				stationary="false" />
+			<FieldConfig Name="Task_desp" Nullable="false"
+				SapComponent="Task_desp" DataType="CHAR" DataLength="40"
+				PlmInfoType="PLM_Task_desp" SapField="MATERIAL" Text="工艺路线描述（必输）"
+				stationary="false" />
+			<!-- stationary：固定传入 stationary_value：固定值 -->
+			<FieldConfig Name="usage" Nullable="false" SapComponent="usage"
+				DataType="CHAR" DataLength="3" PlmInfoType="PLM_usage" SapField="MATERIAL"
+				Text="用途（固定）" stationary="true" stationary_value="1" />
+			<FieldConfig Name="status" Nullable="false" SapComponent="status"
+				DataType="CHAR" DataLength="3" PlmInfoType="PLM_status" SapField="MATERIAL"
+				Text="状态（必输）" stationary="false" />
+			<FieldConfig Name="VALID_FROM" Nullable="true"
+				SapComponent="VALID_FROM" DataType="DATE" DataLength="8"
+				PlmInfoType="PLM_VALID_FROM" SapField="MATERIAL" Text="有效起始日期"
+				stationary="false" />
+			<FieldConfig Name="ACTIVITY" Nullable="false"
+				SapComponent="ACTIVITY" DataType="CHAR" DataLength="4" PlmInfoType="PLM_ACTIVITY"
+				SapField="MATERIAL" Text="工序编号（必输）" stationary="false" />
+			<FieldConfig Name="SEQUENCE_NO" Nullable="true"
+				SapComponent="SEQUENCE_NO" DataType="CHAR" DataLength="6"
+				PlmInfoType="PLM_SEQUENCE_NO" SapField="MATERIAL" Text="序列" stationary="false" />
+			<FieldConfig Name="work_cntr" Nullable="false"
+				SapComponent="work_cntr" DataType="CHAR" DataLength="8" PlmInfoType="PLM_work_cntr"
+				SapField="MATERIAL" Text="工作中心（必输）" stationary="false" />
+			<FieldConfig Name="control_key" Nullable="false"
+				SapComponent="control_key" DataType="CHAR" DataLength="4"
+				PlmInfoType="PLM_control_key" SapField="MATERIAL" Text="控制码（必输）"
+				stationary="false" />
+			<FieldConfig Name="description1" Nullable="false"
+				SapComponent="description1" DataType="CHAR" DataLength="40"
+				PlmInfoType="PLM_description1" SapField="MATERIAL" Text="工序描述（必输）"
+				stationary="false" />
+			<!-- 有固定值 -->
+			<FieldConfig Name="base_quantity" Nullable="false"
+				SapComponent="base_quantity" DataType="QUAN" DataLength="17"
+				PlmInfoType="PLM_base_quantity" SapField="MATERIAL" Text="基本数量（固定）"
+				stationary="true" stationary_value="10000" />
+			<FieldConfig Name="BREAK_TIME" Nullable="true"
+				SapComponent="BREAK_TIME" DataType="QUAN" DataLength="9"
+				PlmInfoType="PLM_BREAK_TIME" SapField="MATERIAL" Text="休息时间" stationary="false" />
+			<FieldConfig Name="BREAK_UNIT" Nullable="true"
+				SapComponent="BREAK_UNIT" DataType="CHAR" DataLength="3"
+				PlmInfoType="PLM_BREAK_UNIT" SapField="MATERIAL" Text="休息时间单位"
+				stationary="false" />
+			<FieldConfig Name="machine" Nullable="false"
+				SapComponent="machine" DataType="CHAR" DataLength="9" PlmInfoType="PLM_machine"
+				SapField="MATERIAL" Text="机器工时（必输）" stationary="false" />
+			<FieldConfig Name="labor" Nullable="false" SapComponent="labor"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_labor" SapField="MATERIAL"
+				Text="人工工时（必输）" stationary="false" />
+			<FieldConfig Name="VGW03" Nullable="false" SapComponent="VGW03"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_VGW03" SapField="MATERIAL"
+				Text="间接人工（必输）" stationary="false" />
+			<FieldConfig Name="VGW04" Nullable="false" SapComponent="VGW04"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_VGW04" SapField="MATERIAL"
+				Text="固定费用（必输）" stationary="false" />
+			<FieldConfig Name="VGW05" Nullable="false" SapComponent="VGW05"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_VGW05" SapField="MATERIAL"
+				Text="变动费用（必输）" stationary="false" />
+			<FieldConfig Name="VGW06" Nullable="false" SapComponent="VGW06"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_VGW06" SapField="MATERIAL"
+				Text="人工附加（必输）" stationary="false" />
+			<FieldConfig Name="SPLIT" Nullable="true" SapComponent="SPLIT"
+				DataType="CHAR" DataLength="1" PlmInfoType="PLM_SPLIT" SapField="MATERIAL"
+				Text="所需分解" stationary="false" />
+			<FieldConfig Name="SPLIT_NUM" Nullable="true"
+				SapComponent="SPLIT_NUM" DataType="DEC" DataLength="3" PlmInfoType="PLM_SPLIT_NUM"
+				SapField="MATERIAL" Text="最大分解号" stationary="false" />
+			<FieldConfig Name="KEYWORD" Nullable="true" SapComponent="KEYWORD"
+				DataType="CHAR" DataLength="7" PlmInfoType="PLM_KEYWORD" SapField="MATERIAL"
+				Text="关键词 ID 用于 PS 用户定义字段" stationary="false" />
+			<FieldConfig Name="WORKSHOP" Nullable="true"
+				SapComponent="WORKSHOP" DataType="CHAR" DataLength="20" PlmInfoType="PLM_WORKSHOP"
+				SapField="MATERIAL" Text="20 个字符的用户字段" stationary="false" />
+			<FieldConfig Name="CLASS1" Nullable="true" SapComponent="CLASS1"
+				DataType="CHAR" DataLength="20" PlmInfoType="PLM_CLASS1" SapField="MATERIAL"
+				Text="20 个字符的用户字段" stationary="false" />
+			<FieldConfig Name="CLASS2" Nullable="true" SapComponent="CLASS2"
+				DataType="CHAR" DataLength="10" PlmInfoType="PLM_CLASS2" SapField="MATERIAL"
+				Text="用户字段有10个字符 " stationary="false" />
+			<FieldConfig Name="CLASS3" Nullable="true" SapComponent="CLASS3"
+				DataType="CHAR" DataLength="10" PlmInfoType="PLM_CLASS3" SapField="MATERIAL"
+				Text="用户字段有10个字符 " stationary="false" />
+			<FieldConfig Name="CONVERS" Nullable="true" SapComponent="CONVERS"
+				DataType="QUAN" DataLength="13" PlmInfoType="PLM_CONVERS" SapField="MATERIAL"
+				Text="用户字段数量(长度10.3)" stationary="false" />
+			<FieldConfig Name="CONVERS_U" Nullable="true"
+				SapComponent="CONVERS_U" DataType="UNIT" DataLength="3" PlmInfoType="PLM_CONVERS_U"
+				SapField="MATERIAL" Text="用户定义的字段：数量字段单位" stationary="false" />
+		</Table>
+		<!-- 目前有用的属性 Name：输入表名 IsReturn：是传入表还是返回表 -->
+		<Table Name="RETURN" IsReturn="true" TableSource="Self"
+			ReturnMsg="" ReturnType="TYPE" isTable="true">
+			<FieldConfig Name="TYPE" SapField="TYPE" DataType="CHAR"
+				DataLength="1" Nullable="false" Text="消息类型: S 成功,E 错误" isTable="true" />
+			<FieldConfig Name="ds" SapField="TYPE" DataType="CHAR"
+				DataLength="1" Nullable="false" Text="消息类型: S 成功,E 错误" isTable="true" />
+		</Table>
+	</Function>
+	<!--库存查询 -->
+	<Function Name="SAPInventory" Text="库存查询" FunctionName="ZMM_GETINVENTORY"
+		IsMainFunction="False" ConditionFunc="" ExistFunc="" ExistStatus="更改"
+		ReturenType="" RetrueMsg="" ItemType="BOM" Status="新建">
+		<FieldConfig PlmInfoType="PARTNUMBER" SapComponent="I_MATNR"
+			SapField="I_MATNR" Text="物料号" />
+		<Table Name="T_MARD" TableSource="Self" Return="true" ReturnMsg=""
+			ReturnType="" UpdatePlm="true">
+			<FieldConfig PlmInfoType="" SapComponent="MATNR"
+				SapField="MATNR" Text="物料号" />
+			<FieldConfig PlmInfoType="" SapComponent="MAKTX"
+				SapField="MAKTX" Text="物料描述" />
+			<FieldConfig PlmInfoType="" SapComponent="WERKS"
+				SapField="WERKS" Text="工厂" />
+			<FieldConfig PlmInfoType="" SapComponent="LGORT"
+				SapField="LGORT" Text="库存地点" />
+			<FieldConfig PlmInfoType="" SapComponent="SMENG"
+				SapField="SMENG" Text="汇总数" />
+			<FieldConfig PlmInfoType="" SapComponent="MEINS"
+				SapField="MEINS" Text="基本计量单位" />
+		</Table>
+	</Function>
+	<!--回写ITEM_NO -->
+	<Function Name="SAPFIELDTOPLM" Text="BOM项目号回写" FunctionName="ZMM_GETBOMLIST"
+		IsMainFunction="True" ConditionFunc="" ExistFunc="" ExistStatus="更改"
+		ReturenType="" RetrueMsg="" ItemType="ITEM_NO" Status="新建">
+		<FieldConfig PlmInfoType="PARTNUMBER" SapComponent="I_MATNR"
+			SapField="I_MATNR" Text="物料号" />
+		<FieldConfig PlmInfoType="P_PLANT" SapComponent="I_WERKS"
+			SapField="I_WERKS" Text="工厂" />
+		<FieldConfig PlmInfoType="STLAL" SapComponent="I_BOM_NO"
+			SapField="I_BOM_NO" Text="可选的BOM" />
+		<FieldConfig PlmInfoType="STLAN" SapComponent="I_STLAN"
+			SapField="I_STLAN" Text="BOM用途" />
+		<Table Name="OT_STPO" TableSource="Self" Return="true"
+			ReturnMsg="" ReturnType="" UpdatePlm="true">
+			<FieldConfig PlmInfoType="" SapComponent="IDNRK"
+				SapField="IDNRK" Text="BOM组件" />
+			<FieldConfig PlmInfoType="" SapComponent="POSNR"
+				SapField="POSNR" Text="BOM项目号" />
+			<FieldConfig PlmInfoType="" SapComponent="MAKTX"
+				SapField="MAKTX" Text="物料描述" />
+		</Table>
+	</Function>
+
+</SAPConfig>

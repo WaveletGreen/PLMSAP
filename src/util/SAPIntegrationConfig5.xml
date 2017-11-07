@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SAPConfig version="1.0">
+	<!--接口、服务器配置 -->
+	<Organize Name="KHYJ" Text="康华-DEV" AppServerHost="192.168.90.102"
+		SystemNumber="00" SystemID="DEV" User="khplmcs" Password="12345678"
+		Client="120" Language="ZH" PoolSize="5" IdleTimeout="600"
+		JCO_PEAK_LIMIT="10" />
+	<!--物料传递 -->
+	<Function Name="PartTOSap" Text="传递物料到SAP" FunctionName="ZPLM_MAINTAIN_MAT">
+		<!--PlmInfoType: 填充表的所需要对象 Relation 对象关系，如无对象关系，属性直接获取对象 Form 如有对象关系，属性直接从表单上获取 
+			DataType： SAP对应的数据类型  Length : SAP字段长度，在传递前需要检查 SapComponent,SapField ： SAP字段名 
+			Text: SAP字段本地化，用来检查抛出错误使用 System: 表明此字段是系统使用 I,U -->
+		<FieldConfig PlmInfoType="" Relation="" Form="" PlmField="kh3_wllx"
+			DataType="CHAR" Length="1" SapComponent="MODEL" SapField="MODEL"
+			Text="模式" System="True" />
+		<!--Name: 表名 IsReturn: 此表是否是返回表 TableSource: 对象的获取源头 -->
+		<Table Name="T_MARA" IsReturn="False" TablelSource="Item">
+			<!--RegularExpression: 正则表达式，用来校验属性格式 DefaultValue: 默认值，在填写默认值的情况下，如字段名为空，则采用此值传递 
+				IsEmpty: 是否允许为空， 不区分True,False 大小写 Format: 数据格式化等同String.Format -->
+			<FieldConfig PlmInfoType="PartRevision" Relation="Part Revision Master"
+				Form="" PlmField="kh3_wllx" DataType="String" Length="128"
+				SapComponent="MTART" SapField="MTART" Text="物料类型" RegularExpression=""
+				DefaultValue="10010101" IsEmpty="True" Format="" />
+		</Table>
+		<Table Name="T_RETURN" IsReturn="True">
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField="TYPE"
+				DataType="String" Length="1" SapComponent="TYPE" SapField="TYPE"
+				Text="消息类型" />
+		</Table>
+	</Function>
+
+	<!--BOM传递 -->
+	<Function Name="BomTOSap" Text="传递BOM" FunctionName="ZPLM_MAINTAIN_BOM">
+		<!--PlmInfoType: 填充表的所需要对象 Relation 对象关系，如无对象关系，属性直接获取对象 Form 如有对象关系，属性直接从表单上获取 
+			DataType： SAP对应的数据类型 Length : SAP字段长度，在传递前需要检查 SapComponent,SapField ： SAP字段名 
+			Text: SAP字段本地化，用来检查抛出错误使用 System: 表明此字段是系统使用 I,U -->
+		<FieldConfig PlmInfoType="" Relation="" Form="" PlmField="kh3_wllx"
+			DataType="CHAR" Length="1" SapComponent="MODEL" SapField="MODEL"
+			Text="模式" System="True" />
+		<!--Name: 表名 IsReturn: 此表是否是返回表 TableSource: BomLine 表示数据从BomLine上获取 -->
+		<Table Name="ZPLM_BOM" IsReturn="False" TablelSource="BomLine">
+			<!--RegularExpression: 正则表达式，用来校验属性格式 DefaultValue: 默认值，在填写默认值的情况下，如字段名为空，则采用此值传递 
+				IsEmpty: 是否允许为空， 不区分True,False 大小写 Format: 数据格式化等同String.Format -->
+			<FieldConfig PlmInfoType="PartRevision" Relation="Part Revision Master"
+				Form="" PlmField="kh3_wllx" DataType="String" Length="128"
+				SapComponent="MTART" SapField="MTART" Text="物料类型" RegularExpression=""
+				DefaultValue="10010101" IsEmpty="True" Format="" FieldType="Parent" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="Part Revision Master"
+				Form="" PlmField="kh3_wllx" DataType="String" Length="128"
+				SapComponent="MTART" SapField="MTART" Text="物料类型" RegularExpression=""
+				DefaultValue="10010101" IsEmpty="True" Format="" FieldType="Child" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField="kh3_wllx"
+				DataType="String" Length="128" SapComponent="MTART" SapField="MTART"
+				Text="物料类型" RegularExpression="" DefaultValue="10010101" IsEmpty="True"
+				Format="" FieldType="BomLine" />
+		</Table>
+		<Table Name="T_RETURN" TableSource="Self" Return="true"
+			ReturnMsg="MSG_TXT" ReturnType="">
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField="TYPE"
+				DataType="String" Length="1" SapComponent="TYPE" SapField="TYPE"
+				Text="消息类型" />
+		</Table>
+	</Function>
+
+	<!--工艺路线传递 -->
+	<!--BOM传递 -->
+	<Function Name="BomTOSap" Text="传递工艺路线" FunctionName="ZPLM_MAINTAIN_ROUTING">
+		<!--PlmInfoType: 填充表的所需要对象 Relation 对象关系，如无对象关系，属性直接获取对象 Form 如有对象关系，属性直接从表单上获取 
+			DataType： SAP对应的数据类型 Length : SAP字段长度，在传递前需要检查 SapComponent,SapField ： SAP字段名 
+			Text: SAP字段本地化，用来检查抛出错误使用 System: 表明此字段是系统使用 I,U -->
+		<FieldConfig PlmInfoType="" Relation="" Form="" PlmField="kh3_wllx"
+			DataType="CHAR" Length="1" SapComponent="MODEL" SapField="MODEL"
+			Text="模式" System="True" />
+		<!--Name: 表名 IsReturn: 此表是否是返回表 TableSource: BomLine 表示数据从BomLine上获取 -->
+		<Table Name="ZPLM_BOM" IsReturn="False" TablelSource="BomLine">
+			<!--RegularExpression: 正则表达式，用来校验属性格式 DefaultValue: 默认值，在填写默认值的情况下，如字段名为空，则采用此值传递 
+				IsEmpty: 是否允许为空， 不区分True,False 大小写 Format: 数据格式化等同String.Format -->
+			<FieldConfig PlmInfoType="PartRevision" Relation="Part Revision Master"
+				Form="" PlmField="kh3_wllx" DataType="String" Length="128"
+				SapComponent="MTART" SapField="MTART" Text="物料类型" RegularExpression=""
+				DefaultValue="10010101" IsEmpty="True" Format="" FieldType="Parent" />
+			<FieldConfig PlmInfoType="PartRevision" Relation="Part Revision Master"
+				Form="" PlmField="kh3_wllx" DataType="String" Length="128"
+				SapComponent="MTART" SapField="MTART" Text="物料类型" RegularExpression=""
+				DefaultValue="10010101" IsEmpty="True" Format="" FieldType="Child" />
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField="kh3_wllx"
+				DataType="String" Length="128" SapComponent="MTART" SapField="MTART"
+				Text="物料类型" RegularExpression="" DefaultValue="10010101" IsEmpty="True"
+				Format="" FieldType="BomLine" />
+		</Table>
+		<Table Name="T_RETURN" TableSource="Self" Return="true"
+			ReturnMsg="MSG_TXT" ReturnType="">
+			<FieldConfig PlmInfoType="" Relation="" Form="" PlmField="TYPE"
+				DataType="String" Length="1" SapComponent="TYPE" SapField="TYPE"
+				Text="消息类型" />
+		</Table>
+	</Function>
+	<!--库存查询 -->
+	<Function Name="SAPInventory" Text="库存查询" FunctionName="ZMM_GETINVENTORY"
+		IsMainFunction="False" ConditionFunc="" ExistFunc="" ExistStatus="更改"
+		ReturenType="" RetrueMsg="" ItemType="BOM" Status="新建">
+		<FieldConfig PlmInfoType="PARTNUMBER" SapComponent="I_MATNR"
+			SapField="I_MATNR" Text="物料号" />
+		<Table Name="T_MARD" TableSource="Self" Return="true" ReturnMsg=""
+			ReturnType="" UpdatePlm="true">
+			<FieldConfig PlmInfoType="" SapComponent="MATNR"
+				SapField="MATNR" Text="物料号" />
+			<FieldConfig PlmInfoType="" SapComponent="MAKTX"
+				SapField="MAKTX" Text="物料描述" />
+			<FieldConfig PlmInfoType="" SapComponent="WERKS"
+				SapField="WERKS" Text="工厂" />
+			<FieldConfig PlmInfoType="" SapComponent="LGORT"
+				SapField="LGORT" Text="库存地点" />
+			<FieldConfig PlmInfoType="" SapComponent="SMENG"
+				SapField="SMENG" Text="汇总数" />
+			<FieldConfig PlmInfoType="" SapComponent="MEINS"
+				SapField="MEINS" Text="基本计量单位" />
+		</Table>
+	</Function>
+</SAPConfig>

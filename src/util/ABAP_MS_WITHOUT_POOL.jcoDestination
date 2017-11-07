@@ -1,0 +1,11 @@
+#KH QAS TEST !
+#Tue Oct 17 18:08:06 CST 2017
+<--#该文件是连接SAP系统的配置文件-->
+jco.client.lang=zh
+jco.destination.peak_limit=10
+jco.client.client=800
+jco.client.passwd=f2kgXlkCkg1yq{hW~e[@3I:S:(0xz;elnRm6k;%1TWVj@@Qd
+jco.client.user=khplmcs
+jco.client.sysnr=00
+jco.destination.pool_capacity=5
+jco.client.ashost=192.168.90.104

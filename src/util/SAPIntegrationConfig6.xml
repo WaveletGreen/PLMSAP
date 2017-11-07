@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SAPConfig version="1.0">
+	<!--接口、服务器配置 -->
+	<Organize Name="KHYJ" Text="康华-DEV" AppServerHost="192.168.90.102"
+		SystemNumber="00" SystemID="DEV" User="khplmcs" Password="12345678"
+		Client="120" Language="ZH" PoolSize="5" IdleTimeout="600"
+		JCO_PEAK_LIMIT="10" />
+	<!--物料传递 -->
+	<Function Name="PartTOSap" Text="传递物料到SAP" FunctionName="ZPLM_MAINTAIN_MAT"
+		ReflectionKey="SapComponent" IsMainFunction="True" ConditionFunc=""
+		ExistStatus="更改" ReturenTable="ZPLM_MAT" RetrueMsg="" ItemType="Part" Status="新建">
+		<FieldConfig Name="MODEL" fieldName="MODEL" DataType="CHAR"
+			DataLength="1" ImportValue="I/U" Nullable="false" PlmInfoType="PARTNUMBER"
+			SapComponent="MODEL" SapField="MATERIAL" Text="物料号" />
+		<!-- 目前有用的属性 Name：输入表名 IsReturn：是传入表还是返回表 -->
+		<Table Name="ZPLM_MAT" IsReturn="false" TableSource="Self"
+			ReturnMsg="MESSAGE" ReturnType="" RowField="" UpdatePlm="true"
+			isTable="true">
+			<!-- 目前有用的属性 SapComponent:SAP参数名 DataType：数据类型 DataLength：数据长度 Nullable：必输入 -->
+			<FieldConfig Name="MATNR" Nullable="false" SapComponent="MATNR"
+				DataType="CHAR" DataLength="18" PlmInfoType="PLM_MATNR" SapField="MATERIAL"
+				Text="物料编号(必输)" stationary="false" />
+			<FieldConfig Name="MTART" Nullable="true" SapComponent="MTART"
+				DataType="CHAR" DataLength="8" PlmInfoType="PLM_MTART" SapField="MATERIAL"
+				Text="任务清单组码" stationary="false" />
+			<FieldConfig Name="WERKS" Nullable="false" SapComponent="WERKS"
+				DataType="CHAR" DataLength="2" PlmInfoType="PLM_WERKS" SapField="MATERIAL"
+				Text="组件计数器（必输）" stationary="false" />
+			<FieldConfig Name="VKORG" Nullable="false" SapComponent="VKORG"
+				DataType="CHAR" DataLength="40" PlmInfoType="PLM_VKORG" SapField="MATERIAL"
+				Text="工艺路线描述（必输）" stationary="false" />
+			<!-- stationary：固定传入 stationary_value：固定值 -->
+			<FieldConfig Name="MAKTE" Nullable="false" SapComponent="MAKTE"
+				DataType="CHAR" DataLength="3" PlmInfoType="PLM_MAKTE" SapField="MATERIAL"
+				Text="用途（固定）" stationary="true" stationary_value="1" />
+			<FieldConfig Name="MAKTC" Nullable="false" SapComponent="MAKTC"
+				DataType="CHAR" DataLength="3" PlmInfoType="PLM_MAKTC" SapField="MATERIAL"
+				Text="状态（必输）" stationary="false" />
+			<FieldConfig Name="MEINS" Nullable="true" SapComponent="MEINS"
+				DataType="DATE" DataLength="8" PlmInfoType="PLM_MEINS" SapField="MATERIAL"
+				Text="有效起始日期" stationary="false" />
+			<FieldConfig Name="MATKL" Nullable="false" SapComponent="MATKL"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_MATKL" SapField="MATERIAL"
+				Text="工序编号（必输）" stationary="false" />
+			<FieldConfig Name="EXTWG" Nullable="true" SapComponent="EXTWG"
+				DataType="CHAR" DataLength="6" PlmInfoType="PLM_EXTWG" SapField="MATERIAL"
+				Text="序列" stationary="false" />
+			<FieldConfig Name="BISMT" Nullable="false" SapComponent="BISMT"
+				DataType="CHAR" DataLength="8" PlmInfoType="PLM_BISMT" SapField="MATERIAL"
+				Text="工作中心（必输）" stationary="false" />
+			<FieldConfig Name="SPART" Nullable="false" SapComponent="SPART"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_SPART" SapField="MATERIAL"
+				Text="控制码（必输）" stationary="false" />
+			<FieldConfig Name="NTGEW" Nullable="false" SapComponent="NTGEW"
+				DataType="CHAR" DataLength="40" PlmInfoType="PLM_NTGEW" SapField="MATERIAL"
+				Text="工序描述（必输）" stationary="false" />
+			<FieldConfig Name="GEWEI" Nullable="false" SapComponent="GEWEI"
+				DataType="QUAN" DataLength="17" PlmInfoType="PLM_GEWEI" SapField="MATERIAL"
+				Text="基本数量（固定）" stationary="true" stationary_value="10000" />
+			<FieldConfig Name="MEINH" Nullable="true" SapComponent="MEINH"
+				DataType="QUAN" DataLength="9" PlmInfoType="PLM_MEINH" SapField="MATERIAL"
+				Text="休息时间" stationary="false" />
+			<FieldConfig Name="UMREZ" Nullable="true" SapComponent="UMREZ"
+				DataType="CHAR" DataLength="3" PlmInfoType="PLM_UMREZ" SapField="MATERIAL"
+				Text="休息时间单位" stationary="false" />
+			<FieldConfig Name="EKGRP" Nullable="false" SapComponent="EKGRP"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_EKGRP" SapField="MATERIAL"
+				Text="机器工时（必输）" stationary="false" />
+			<FieldConfig Name="MMSTA" Nullable="false" SapComponent="MMSTA"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_MMSTA" SapField="MATERIAL"
+				Text="人工工时（必输）" stationary="false" />
+			<FieldConfig Name="DISPO" Nullable="false" SapComponent="DISPO"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_DISPO" SapField="MATERIAL"
+				Text="间接人工（必输）" stationary="false" />
+			<FieldConfig Name="BESKZ" Nullable="false" SapComponent="BESKZ"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_BESKZ" SapField="MATERIAL"
+				Text="固定费用（必输）" stationary="false" />
+			<FieldConfig Name="DZEIT" Nullable="false" SapComponent="DZEIT"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_DZEIT" SapField="MATERIAL"
+				Text="变动费用（必输）" stationary="false" />
+			<FieldConfig Name="PLIFZ" Nullable="false" SapComponent="PLIFZ"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_PLIFZ" SapField="MATERIAL"
+				Text="人工附加（必输）" stationary="false" />
+			<FieldConfig Name="WEBAZ" Nullable="true" SapComponent="WEBAZ"
+				DataType="CHAR" DataLength="1" PlmInfoType="PLM_WEBAZ" SapField="MATERIAL"
+				Text="所需分解" stationary="false" />
+			<FieldConfig Name="LGPRO" Nullable="true" SapComponent="LGPRO"
+				DataType="DEC" DataLength="3" PlmInfoType="PLM_LGPRO" SapField="MATERIAL"
+				Text="最大分解号" stationary="false" />
+			<FieldConfig Name="LGFSB" Nullable="true" SapComponent="LGFSB"
+				DataType="CHAR" DataLength="7" PlmInfoType="PLM_LGFSB" SapField="MATERIAL"
+				Text="关键词 ID 用于 PS 用户定义字段" stationary="false" />
+			<FieldConfig Name="EISLO" Nullable="true" SapComponent="EISLO"
+				DataType="CHAR" DataLength="20" PlmInfoType="PLM_EISLO" SapField="MATERIAL"
+				Text="20 个字符的用户字段" stationary="false" />
+			<FieldConfig Name="EISBE" Nullable="true" SapComponent="EISBE"
+				DataType="CHAR" DataLength="20" PlmInfoType="PLM_EISBE" SapField="MATERIAL"
+				Text="20 个字符的用户字段" stationary="false" />
+			<FieldConfig Name="FEVOR" Nullable="true" SapComponent="FEVOR"
+				DataType="CHAR" DataLength="10" PlmInfoType="PLM_FEVOR" SapField="MATERIAL"
+				Text="用户字段有10个字符 " stationary="false" />
+			<FieldConfig Name="UEETO" Nullable="true" SapComponent="UEETO"
+				DataType="CHAR" DataLength="10" PlmInfoType="PLM_UEETO" SapField="MATERIAL"
+				Text="用户字段有10个字符 " stationary="false" />
+			<FieldConfig Name="MHDRZ" Nullable="true" SapComponent="MHDRZ"
+				DataType="QUAN" DataLength="13" PlmInfoType="PLM_MHDRZ" SapField="MATERIAL"
+				Text="用户字段数量(长度10.3)" stationary="false" />
+			<FieldConfig Name="BKLAS" Nullable="true" SapComponent="BKLAS"
+				DataType="UNIT" DataLength="3" PlmInfoType="PLM_BKLAS" SapField="MATERIAL"
+				Text="用户定义的字段：数量字段单位" stationary="false" />
+			<FieldConfig Name="VPRSV" Nullable="true" SapComponent="VPRSV"
+				DataType="UNIT" DataLength="3" PlmInfoType="PLM_VPRSV" SapField="MATERIAL"
+				Text="用户定义的字段：数量字段单位" stationary="false" />
+			<FieldConfig Name="PEINH" Nullable="true" SapComponent="PEINH"
+				DataType="UNIT" DataLength="3" PlmInfoType="PLM_PEINH" SapField="MATERIAL"
+				Text="用户定义的字段：数量字段单位" stationary="false" />
+			<!-- 固定值 -->
+			<FieldConfig Name="MBRSH" Nullable="false" SapComponent="MBRSH"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_MBRSH" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="VTWEG" Nullable="false" SapComponent="VTWEG"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_VTWEG" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="ALAND" Nullable="false" SapComponent="ALAND"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_ALAND" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="TATYP" Nullable="false" SapComponent="TATYP"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_TATYP" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="TAXKM" Nullable="false" SapComponent="TAXKM"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_TAXKM" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="KTGRM" Nullable="false" SapComponent="KTGRM"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_KTGRM" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="MTPOV" Nullable="false" SapComponent="MTPOV"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_MTPOV" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="TRAGR" Nullable="false" SapComponent="TRAGR"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_TRAGR" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="MTVFP" Nullable="false" SapComponent="MTVFP"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_MTVFP" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="LADGR" Nullable="false" SapComponent="LADGR"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_LADGR" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="DISMM" Nullable="false" SapComponent="DISMM"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_DISMM" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="DISLS" Nullable="false" SapComponent="DISLS"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_DISLS" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="BSTMI" Nullable="false" SapComponent="BSTMI"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_BSTMI" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="FHORI" Nullable="false" SapComponent="FHORI"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_FHORI" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="STRGR" Nullable="false" SapComponent="STRGR"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_STRGR" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="VRMOD" Nullable="false" SapComponent="VRMOD"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_VRMOD" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="VINT1" Nullable="false" SapComponent="VINT1"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_VINT1" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="VINT2" Nullable="false" SapComponent="VINT2"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_VINT2" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="MTVFM" Nullable="false" SapComponent="MTVFM"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_MTVFM" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="SFCPF" Nullable="false" SapComponent="SFCPF"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_SFCPF" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="HKMAT" Nullable="false" SapComponent="HKMAT"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_HKMAT" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="LOSGR" Nullable="false" SapComponent="LOSGR"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_LOSGR" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="AWSLS" Nullable="false" SapComponent="AWSLS"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_AWSLS" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="PRCTR" Nullable="false" SapComponent="PRCTR"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_PRCTR" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+		</Table>
+		<!-- 目前有用的属性 Name：输入表名 IsReturn：是传入表还是返回表 -->
+		<Table Name="RETURN" IsReturn="true" TableSource="Self"
+			ReturnMsg="" ReturnType="TYPE" isTable="true">
+			<FieldConfig Name="TYPE" SapField="TYPE" DataType="CHAR"
+				DataLength="1" Nullable="false" Text="消息类型: S 成功,E 错误" isTable="true" />
+			<FieldConfig Name="ds" SapField="TYPE" DataType="CHAR"
+				DataLength="1" Nullable="false" Text="消息类型: S 成功,E 错误" isTable="true" />
+		</Table>
+	</Function>
+
+	<!--工艺路线传递 -->
+	<Function Name="RoutingTOSap" FunctionName="ZPLM_MAINTAIN_ROUTING"
+		Text="传递工艺路线到SAP" IsMainFunction="True" ConditionFunc="" ExistFunc=""
+		ExistStatus="更改" ReturenTable="ZPLM_ROUTING" RetrueMsg="" ItemType="BOM" Status="新建"
+		ReflectionKey="SapComponent">
+		<FieldConfig Name="MODEL" fieldName="MODEL" DataType="CHAR"
+			DataLength="1" ImportValue="I/U" Nullable="false" PlmInfoType="PARTNUMBER"
+			SapComponent="MODEL" SapField="MATERIAL" Text="物料号" />
+		<!-- 目前有用的属性 Name：输入表名 IsReturn：是传入表还是返回表 -->
+		<Table Name="ZPLM_ROUTING" IsReturn="false" TableSource="Self"
+			ReturnMsg="MESSAGE" ReturnType="" RowField="" UpdatePlm="true"
+			isTable="true">
+			<!-- 目前有用的属性 SapComponent:SAP参数名 DataType：数据类型 DataLength：数据长度 Nullable：必输入 -->
+			<FieldConfig Name="matnr" Nullable="false" SapComponent="matnr"
+				DataType="CHAR" DataLength="18" PlmInfoType="PLM_matnr" SapField="MATERIAL"
+				Text="物料编号(必输)" stationary="false" />
+			<FieldConfig Name="Werks" Nullable="false" SapComponent="Werks"
+				DataType="CHAR" DataLength="4" PlmInfoType="PLM_Werks" SapField="MATERIAL"
+				Text="工厂（必输）" stationary="false" />
+			<FieldConfig Name="PLNNR" Nullable="true" SapComponent="PLNNR"
+				DataType="CHAR" DataLength="8" PlmInfoType="PLM_PLNNR" SapField="MATERIAL"
+				Text="任务清单组码" stationary="false" />
+			<FieldConfig Name="groupcounter" Nullable="false"
+				SapComponent="groupcounter" DataType="CHAR" DataLength="2"
+				PlmInfoType="PLM_groupcounter" SapField="MATERIAL" Text="组件计数器（必输）"
+				stationary="false" />
+			<FieldConfig Name="Task_desp" Nullable="false"
+				SapComponent="Task_desp" DataType="CHAR" DataLength="40"
+				PlmInfoType="PLM_Task_desp" SapField="MATERIAL" Text="工艺路线描述（必输）"
+				stationary="false" />
+			<!-- stationary：固定传入 stationary_value：固定值 -->
+			<FieldConfig Name="usage" Nullable="false" SapComponent="usage"
+				DataType="CHAR" DataLength="3" PlmInfoType="PLM_usage" SapField="MATERIAL"
+				Text="用途（固定）" stationary="true" stationary_value="1" />
+			<FieldConfig Name="status" Nullable="false" SapComponent="status"
+				DataType="CHAR" DataLength="3" PlmInfoType="PLM_status" SapField="MATERIAL"
+				Text="状态（必输）" stationary="false" />
+			<FieldConfig Name="VALID_FROM" Nullable="true"
+				SapComponent="VALID_FROM" DataType="DATE" DataLength="8"
+				PlmInfoType="PLM_VALID_FROM" SapField="MATERIAL" Text="有效起始日期"
+				stationary="false" />
+			<FieldConfig Name="ACTIVITY" Nullable="false"
+				SapComponent="ACTIVITY" DataType="CHAR" DataLength="4" PlmInfoType="PLM_ACTIVITY"
+				SapField="MATERIAL" Text="工序编号（必输）" stationary="false" />
+			<FieldConfig Name="SEQUENCE_NO" Nullable="true"
+				SapComponent="SEQUENCE_NO" DataType="CHAR" DataLength="6"
+				PlmInfoType="PLM_SEQUENCE_NO" SapField="MATERIAL" Text="序列"
+				stationary="false" />
+			<FieldConfig Name="work_cntr" Nullable="false"
+				SapComponent="work_cntr" DataType="CHAR" DataLength="8" PlmInfoType="PLM_work_cntr"
+				SapField="MATERIAL" Text="工作中心（必输）" stationary="false" />
+			<FieldConfig Name="control_key" Nullable="false"
+				SapComponent="control_key" DataType="CHAR" DataLength="4"
+				PlmInfoType="PLM_control_key" SapField="MATERIAL" Text="控制码（必输）"
+				stationary="false" />
+			<FieldConfig Name="description1" Nullable="false"
+				SapComponent="description1" DataType="CHAR" DataLength="40"
+				PlmInfoType="PLM_description1" SapField="MATERIAL" Text="工序描述（必输）"
+				stationary="false" />
+			<!-- 有固定值 -->
+			<FieldConfig Name="base_quantity" Nullable="false"
+				SapComponent="base_quantity" DataType="QUAN" DataLength="17"
+				PlmInfoType="PLM_base_quantity" SapField="MATERIAL" Text="基本数量（固定）"
+				stationary="true" stationary_value="10000" />
+			<FieldConfig Name="BREAK_TIME" Nullable="true"
+				SapComponent="BREAK_TIME" DataType="QUAN" DataLength="9"
+				PlmInfoType="PLM_BREAK_TIME" SapField="MATERIAL" Text="休息时间"
+				stationary="false" />
+			<FieldConfig Name="BREAK_UNIT" Nullable="true"
+				SapComponent="BREAK_UNIT" DataType="CHAR" DataLength="3"
+				PlmInfoType="PLM_BREAK_UNIT" SapField="MATERIAL" Text="休息时间单位"
+				stationary="false" />
+			<FieldConfig Name="machine" Nullable="false"
+				SapComponent="machine" DataType="CHAR" DataLength="9" PlmInfoType="PLM_machine"
+				SapField="MATERIAL" Text="机器工时（必输）" stationary="false" />
+			<FieldConfig Name="labor" Nullable="false" SapComponent="labor"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_labor" SapField="MATERIAL"
+				Text="人工工时（必输）" stationary="false" />
+			<FieldConfig Name="VGW03" Nullable="false" SapComponent="VGW03"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_VGW03" SapField="MATERIAL"
+				Text="间接人工（必输）" stationary="false" />
+			<FieldConfig Name="VGW04" Nullable="false" SapComponent="VGW04"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_VGW04" SapField="MATERIAL"
+				Text="固定费用（必输）" stationary="false" />
+			<FieldConfig Name="VGW05" Nullable="false" SapComponent="VGW05"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_VGW05" SapField="MATERIAL"
+				Text="变动费用（必输）" stationary="false" />
+			<FieldConfig Name="VGW06" Nullable="false" SapComponent="VGW06"
+				DataType="CHAR" DataLength="9" PlmInfoType="PLM_VGW06" SapField="MATERIAL"
+				Text="人工附加（必输）" stationary="false" />
+			<FieldConfig Name="SPLIT" Nullable="true" SapComponent="SPLIT"
+				DataType="CHAR" DataLength="1" PlmInfoType="PLM_SPLIT" SapField="MATERIAL"
+				Text="所需分解" stationary="false" />
+			<FieldConfig Name="SPLIT_NUM" Nullable="true"
+				SapComponent="SPLIT_NUM" DataType="DEC" DataLength="3" PlmInfoType="PLM_SPLIT_NUM"
+				SapField="MATERIAL" Text="最大分解号" stationary="false" />
+			<FieldConfig Name="KEYWORD" Nullable="true" SapComponent="KEYWORD"
+				DataType="CHAR" DataLength="7" PlmInfoType="PLM_KEYWORD" SapField="MATERIAL"
+				Text="关键词 ID 用于 PS 用户定义字段" stationary="false" />
+			<FieldConfig Name="WORKSHOP" Nullable="true"
+				SapComponent="WORKSHOP" DataType="CHAR" DataLength="20" PlmInfoType="PLM_WORKSHOP"
+				SapField="MATERIAL" Text="20 个字符的用户字段" stationary="false" />
+			<FieldConfig Name="CLASS1" Nullable="true" SapComponent="CLASS1"
+				DataType="CHAR" DataLength="20" PlmInfoType="PLM_CLASS1" SapField="MATERIAL"
+				Text="20 个字符的用户字段" stationary="false" />
+			<FieldConfig Name="CLASS2" Nullable="true" SapComponent="CLASS2"
+				DataType="CHAR" DataLength="10" PlmInfoType="PLM_CLASS2" SapField="MATERIAL"
+				Text="用户字段有10个字符 " stationary="false" />
+			<FieldConfig Name="CLASS3" Nullable="true" SapComponent="CLASS3"
+				DataType="CHAR" DataLength="10" PlmInfoType="PLM_CLASS3" SapField="MATERIAL"
+				Text="用户字段有10个字符 " stationary="false" />
+			<FieldConfig Name="CONVERS" Nullable="true" SapComponent="CONVERS"
+				DataType="QUAN" DataLength="13" PlmInfoType="PLM_CONVERS" SapField="MATERIAL"
+				Text="用户字段数量(长度10.3)" stationary="false" />
+			<FieldConfig Name="CONVERS_U" Nullable="true"
+				SapComponent="CONVERS_U" DataType="UNIT" DataLength="3" PlmInfoType="PLM_CONVERS_U"
+				SapField="MATERIAL" Text="用户定义的字段：数量字段单位" stationary="false" />
+		</Table>
+		<!-- 目前有用的属性 Name：输入表名 IsReturn：是传入表还是返回表 -->
+		<Table Name="RETURN" IsReturn="true" TableSource="Self"
+			ReturnMsg="" ReturnType="TYPE" isTable="true">
+			<FieldConfig Name="TYPE" SapField="TYPE" DataType="CHAR"
+				DataLength="1" Nullable="false" Text="消息类型: S 成功,E 错误" isTable="true" />
+			<FieldConfig Name="ds" SapField="TYPE" DataType="CHAR"
+				DataLength="1" Nullable="false" Text="消息类型: S 成功,E 错误" isTable="true" />
+		</Table>
+	</Function>
+</SAPConfig>
